@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OED</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+
+    <!-- nav -->
+    <nav class="navbar ">
+        <div class="container">
+            <!-- <h3 class="text-white">OED</h3> -->
+        </div>
+    </nav>
+
+    <!-- body -->
+
+    <div class="main">
+        <div class="headd">
+            <h1>OED <i class="fa-solid fa-window-minimize fa-rotate-90 fa-1x" style="color: #db1c15;"></i> Oxford
+                English Dictionary</h1>
+
+
+        </div>
+
+        <div class="search">
+            <input id="search" class="searchbox ps-3" type="text" placeholder="Search">
+            <button onclick="getResult()" class="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+
+        <div style="color: white;" id="result" class="text-center"></div>
+
+
+
+
+     
+
+        
+
+    </div>
+       <!-- footer -->
+       <div>
+
+        <footer class="footer">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>About Us</h5>
+                        <p>The historical English dictionary <br>
+                            An unsurpassed guide for researchers in any discipline to the meaning, history, and usage of over 500,000 words and phrases across the English-speaking world.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a style="text-decoration: none;" href="#">Home</a></li>
+                            <li><a style="text-decoration: none;" href="#">News</a></li>
+                            <li><a style="text-decoration: none;" href="#">Categories</a></li>
+                            <li><a style="text-decoration: none;" href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Follow Us</h5>
+                        <div class="social-icons">
+                            <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+       </div>
+
+
+</body>
+<script>
+
+    const getResult = async () => {
+        const sr = search.value
+        try {
+            if (search.value === "") {
+                alert("Field cannot be empty!!!")
+            }
+            else {
+                const word = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${sr}`)
+                const wrd = await word.json()
+                // const {dic}=wrd
+                
+                console.log(wrd);
+
+                
+                let definitions=wrd[0].meanings[0].definitions[0];
+                result.innerHTML = `
+                
+                <div  class="ms-5  mt-5">
+                    <h3 >Word: ${wrd[0].word}</h3>
+                 </div>
+
+
+                <div   class="ms-5">
+                    <p><b>Part Of Speech:</b>: ${wrd[0].meanings[0].partOfSpeech}  </p>
+                    </div>
+                
+                
+            <div  class="ms-5">
+                <p ><b>Definition:</b>  ${wrd[0].meanings[0].definitions[0].definition}</p>
+            </div>
+            
+            <div class="ms-5">
+                <p><b>Example:</b> ${definitions.example==undefined?"Not Found":definitions.example} </p>
+            </div>
+           
+                `
+            }
+            search.value=""
+           
+            // <div class="ms-5">
+            //     <p><b>Antonym:</b> ${definitions.antonyms} </p>
+            // </div>
+
+        } catch (err) {
+            console.log(err);
+        }
+    }
+</script>
+
+</html>
