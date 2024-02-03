@@ -29,7 +29,7 @@
 
     <div class="main">
         <div class="headd">
-            <h1>OED <i class="fa-solid fa-window-minimize fa-rotate-90 fa-1x" style="color: #db1c15;"></i> Oxford
+            <h1>OED <i class="fa-solid fa-grip-lines-vertical" style="color: #db1c15;"></i> Oxford
                 English Dictionary</h1>
 
 
@@ -40,7 +40,7 @@
             <button onclick="getResult()" class="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></button>
         </div>
 
-        <div style="color: white;" id="result" class="text-center"></div>
+        <div style="color: white;" id="result" class="text-center "></div>
 
 
 
@@ -74,7 +74,7 @@
                         <h5>Follow Us</h5>
                         <div class="social-icons">
                             <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
-                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-x-twitter"></i></a>
                             <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
                         </div>
                     </div>
@@ -104,21 +104,21 @@
                 let definitions=wrd[0].meanings[0].definitions[0];
                 result.innerHTML = `
                 
-                <div  class="ms-5  mt-5">
+                <div  class="mx-5  mt-5 ">
                     <h3 >Word: ${wrd[0].word}</h3>
                  </div>
 
 
-                <div   class="ms-5">
-                    <p><b>Part Of Speech:</b>: ${wrd[0].meanings[0].partOfSpeech}  </p>
+                <div   class="mx-5">
+                    <p><b>Part Of Speech:</b> ${wrd[0].meanings[0].partOfSpeech}  </p>
                     </div>
                 
                 
-            <div  class="ms-5">
-                <p ><b>Definition:</b>  ${wrd[0].meanings[0].definitions[0].definition}</p>
+            <div  class="mx-2">
+                <p ><b>Definition:</b> ${wrd[0].meanings[0].definitions[0].definition}</p>
             </div>
             
-            <div class="ms-5">
+            <div class="mx-5">
                 <p><b>Example:</b> ${definitions.example==undefined?"Not Found":definitions.example} </p>
             </div>
            
